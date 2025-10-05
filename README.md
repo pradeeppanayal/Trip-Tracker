@@ -19,7 +19,7 @@ It provides a real-time dashboard, trip summaries, and Firebase synchronization 
 
 ## 🏗️ Project Structure
 
-lib/
+```lib/
 ├── business/
 │ └── providers/
 │ ├── trip_provider.dart
@@ -41,6 +41,8 @@ lib/
 │ └── driver_dropdown.dart
 └── main.dart
 
+```
+
 
 ---
 
@@ -59,6 +61,7 @@ cd trip-tracker
 
 nstall Dependencies
 flutter pub get
+```
 
 ### 4️⃣ Configure Firebase
 
@@ -72,18 +75,19 @@ GoogleService-Info.plist (iOS)
 ### 5️⃣ Run the App
 flutter run
 
+
 ## 🧠 How It Works
 
 Each trip record is stored in Firestore with fields like:
 
-{
+```{
   "vehicleNumber": "KL 13 AB 1234",
   "driverName": "John",
   "startDate": "2025-10-05T10:00:00",
   "total": 1500,
   "balance": 600
 }
-
+```
 
 The app fetches trips for the selected date range and groups them by vehicle.
 
@@ -102,16 +106,14 @@ Summary widgets calculate totals dynamically.
 
 ## 🚀 Roadmap
 
- Add authentication
-
- Export trip data to Excel/PDF
-
- Enable live location tracking per trip
-
- Push notifications for upcoming trips
+- Add authentication
+- Export trip data to Excel/PDF
+- Enable live location tracking per trip
+- Push notifications for upcoming trips
 
 ## 🧑‍💻 Author
 
 Pradeep Panayal 
+
 
 Built with ❤️ using Flutter & Firebase
