@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:trip_tracker/business/providers/user_session.dart';
 import '../../models/vehicle.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,16 @@ class VehicleProvider with ChangeNotifier {
           snapshot.docs.map((doc) {
             return Vehicle.fromMap(doc.data(), doc.id);
           }).toList();
+      if (!UserSession.isAdmin) {
+        _vehicles =
+            _vehicles
+                .where(
+                  (vehicle) =>
+                      UserSession.allottedVehicles.contains(vehicle.number),
+                )
+                .toList();
+        ;
+      }
       notifyListeners();
       return "Loaded successfully";
     } catch (e) {

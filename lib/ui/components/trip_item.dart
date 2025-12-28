@@ -4,30 +4,44 @@ import '../../models/trip.dart';
 class TripItem extends StatelessWidget {
   final Trip trip;
   final VoidCallback onEdit;
-  final VoidCallback onDelete;
+  final bool allowEdit;
 
   const TripItem({
     required this.trip,
     required this.onEdit,
-    required this.onDelete,
+    this.allowEdit = false,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       child: ListTile(
-        title: Text("${trip.tripName} (${trip.vehicleNumber})"),
+        title: Text(
+          "${trip.tripName} (${trip.vehicleNumber})",
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Customer: ${trip.customer}"),
             Text("Driver: ${trip.driverName}"),
             Text("KM: ${trip.km}, Total: ₹${trip.total}"),
-            if (trip.comment.isNotEmpty) Text("Note: ${trip.comment}"),
+            if (trip.comment.isNotEmpty)
+              Text(
+                "Note: ${trip.comment}",
+                style: const TextStyle(fontStyle: FontStyle.italic),
+              ),
           ],
         ),
-        trailing: IconButton(icon: const Icon(Icons.edit), onPressed: onEdit),
+
+        // 👇 show only when allowEdit = true
+        trailing:
+            allowEdit
+                ? IconButton(icon: const Icon(Icons.edit), onPressed: onEdit)
+                : null,
       ),
     );
   }

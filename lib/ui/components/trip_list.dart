@@ -5,12 +5,11 @@ import 'trip_item.dart';
 class TripList extends StatelessWidget {
   final List<Trip> trips;
   final Function(Trip) onEdit;
-  final Function(Trip) onDelete;
-
+  final bool allowEdit;
   const TripList({
     required this.trips,
     required this.onEdit,
-    required this.onDelete,
+    required this.allowEdit,
     super.key,
   });
 
@@ -32,7 +31,7 @@ class TripList extends StatelessWidget {
         return TripItem(
           trip: trip,
           onEdit: () => onEdit(trip),
-          onDelete: () => onDelete(trip),
+          allowEdit: allowEdit,
         );
       },
     );

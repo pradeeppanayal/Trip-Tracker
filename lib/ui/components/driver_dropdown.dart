@@ -6,6 +6,7 @@ class DriverDropdown extends StatelessWidget {
   final List<Driver> drivers;
   final ValueChanged<String?> onChanged;
   final bool showAllOption;
+  final String? label;
 
   const DriverDropdown({
     super.key,
@@ -13,6 +14,7 @@ class DriverDropdown extends StatelessWidget {
     required this.drivers,
     required this.onChanged,
     required this.showAllOption,
+    this.label,
   });
 
   @override
@@ -24,7 +26,7 @@ class DriverDropdown extends StatelessWidget {
 
     return DropdownButtonFormField<String>(
       value: selectedDriver,
-      decoration: const InputDecoration(labelText: "Driver"),
+      decoration: InputDecoration(labelText: label ?? "Driver"),
       items:
           options
               .map((v) => DropdownMenuItem(value: v, child: Text(v)))

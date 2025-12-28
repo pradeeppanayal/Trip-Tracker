@@ -6,6 +6,7 @@ class VehicleDropdown extends StatelessWidget {
   final List<Vehicle> vehicles;
   final ValueChanged<String?> onChanged;
   final bool showAllOption;
+  final String? label;
 
   const VehicleDropdown({
     super.key,
@@ -13,17 +14,19 @@ class VehicleDropdown extends StatelessWidget {
     required this.vehicles,
     required this.onChanged,
     required this.showAllOption,
+    this.label,
   });
 
   @override
   Widget build(BuildContext context) {
     final options =
-        showAllOption
+        showAllOption && vehicles.isNotEmpty
             ? ["All", ...vehicles.map((v) => v.number)]
             : [...vehicles.map((v) => v.number)];
+    final textLabel = label ?? "Vehicle";
     return DropdownButtonFormField<String>(
       value: selectedVehicle,
-      decoration: const InputDecoration(labelText: "Vehicle"),
+      decoration: InputDecoration(labelText: textLabel),
       items:
           options
               .map((v) => DropdownMenuItem(value: v, child: Text(v)))
