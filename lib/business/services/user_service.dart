@@ -1,7 +1,6 @@
 // services/user_service.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:trip_tracker/business/providers/user_session.dart';
 
 class UserService {
@@ -20,6 +19,7 @@ class UserService {
   /// 🔥 Fetch user access details from Firestore
   static Future<Map<String, dynamic>?> getUserDetails(String uid) async {
     final doc = await _db.collection("users").doc(uid).get();
+    print(doc);
     return doc.exists ? doc.data() : null;
   }
 
@@ -45,5 +45,15 @@ class UserService {
       print("Error updating PIN: $e");
       return false;
     }
+  }
+
+  /// Fetch all users
+  static Future<List<Map<String, dynamic>>> getAllUsers() async {
+    final query = await _db.collection("users").get();
+    return query.docs.map((doc) {
+      final data = doc.data();
+      data["id"] = doc.id; // attach doc ID for reference if needed
+      return data;
+    }).toList();
   }
 }

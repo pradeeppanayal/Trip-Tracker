@@ -4,6 +4,7 @@ import 'package:trip_tracker/business/providers/driver_provider.dart';
 import 'package:trip_tracker/business/providers/trip_provider.dart';
 import 'package:trip_tracker/business/providers/user_session.dart';
 import 'package:trip_tracker/business/providers/vehicle_provider.dart';
+import 'package:trip_tracker/ui/pages/all_users_page.dart';
 
 import 'package:trip_tracker/ui/pages/driver_page.dart';
 import 'package:trip_tracker/ui/pages/landing_page.dart';
@@ -46,6 +47,7 @@ class _HomePageState extends State<HomePage> {
               VehiclesPage(),
               TripsPage(),
               DriversPage(),
+              AllUsersPage(),
               ProfilePage(),
             ]
             : const [TripsPage(), ProfilePage()];
@@ -62,10 +64,8 @@ class _HomePageState extends State<HomePage> {
                 label: "Vehicles",
               ),
               BottomNavigationBarItem(icon: Icon(Icons.route), label: "Trips"),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.people),
-                label: "Drivers",
-              ),
+              BottomNavigationBarItem(icon: Icon(Icons.work), label: "Drivers"),
+              BottomNavigationBarItem(icon: Icon(Icons.people), label: "Users"),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: "Profile",

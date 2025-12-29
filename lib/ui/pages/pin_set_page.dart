@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trip_tracker/business/providers/user_session.dart';
 import 'package:trip_tracker/business/services/user_service.dart';
 import 'package:trip_tracker/ui/pages/home_page.dart';
 
@@ -60,7 +61,16 @@ class _PinSetPageState extends State<PinSetPage> {
       });
       return;
     }
+    String? uid = UserSession.currentUserId();
+    if (uid == null) {
+      setState(() {
+        errorMessage = "Invalid user info.";
+        _isLoading = false;
+      });
+      return;
+    }
 
+    await UserSession.loadUserDetails(uid);
     // Navigate to home screen
     if (mounted) {
       Navigator.pushReplacement(
